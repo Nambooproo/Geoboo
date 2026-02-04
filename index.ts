@@ -14,11 +14,11 @@ const client = new Discord.Client({
 });
 
 app.get("/", (_, res) => {
-  res.send("Bot is Alive")
+  res.send("Bot is Alive");
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("bot is running")
+  console.log("bot is running!");
 });
 
 client.on(Discord.Events.MessageCreate, async (message: Discord.Message) => {
@@ -28,7 +28,7 @@ client.on(Discord.Events.MessageCreate, async (message: Discord.Message) => {
 });
 
 try {
-  client.login(TOKEN)
+  client.login(TOKEN);
 } catch (err) {
-  console.error(err)
+  console.error(err);
 }
