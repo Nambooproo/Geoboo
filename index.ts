@@ -116,4 +116,5 @@ client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
 });
 
 console.log("Starting bot...");
+console.log(process.env.DISCORD_TOKEN);
 client.login(process.env.DISCORD_TOKEN);
