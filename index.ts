@@ -78,12 +78,13 @@ function getCommand(cmdName: string) {
 
 // Ready event
 client.once(Discord.Events.ClientReady, async () => {
+  console.log(`🤖 Logged in as ${client.user?.tag}`);
+
   try {
     await mongo.connect();
     db = mongo.db("geoboo");
     (client as any).db = db;
     console.log("✅ Connected to MongoDB");
-    console.log(`🤖 Logged in as ${client.user?.tag}`);
   } catch (err) {
     console.error("❌ MongoDB connection failed:", err);
   }
@@ -114,4 +115,5 @@ client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
   }
 });
 
+console.log("Starting bot...");
 client.login(process.env.DISCORD_TOKEN);
