@@ -15,6 +15,7 @@ const client = new Discord.Client({
 
 app.use(express.json());
 
+
 app.get("/", (_, res) => {
   res.send("Bot is Alive");
 });
