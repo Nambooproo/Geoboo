@@ -4,7 +4,7 @@ import * as Discord from "discord.js";
 
 const TOKEN = process.env.DISCORD_TOKEN;
 console.log("STARTING BOT...");
-console.log("TOKEN:", process.env.DISCORD_TOKEN);
+
 const app = express();
 
 const client = new Discord.Client({
