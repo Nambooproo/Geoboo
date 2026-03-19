@@ -113,3 +113,5 @@ client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
     slashCommandHandler(interaction)
   }
 });
+
+client.login(process.env.DISCORD_TOKEN);
