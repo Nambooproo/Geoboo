@@ -50,7 +50,7 @@ const GlobalCmds = loadCommands("./Commands/Global");
 const GuildCmds = loadCommands("./Commands/Guild");
 const SecretCmds = loadCommands("./Commands/Secret");
 
-const botID = "1424308700721447033";
+const botID = "1468647600747188304";
 const serverIDS: (string | undefined)[] = [
   process.env.SERVER_ID
 ].filter(Boolean); // remove undefined
