@@ -1,3 +1,4 @@
+process.env.NODE_OPTIONS = "--dns-result-order=ipv4first";
 import dns from "dns";
 dns.setDefaultResultOrder("ipv4first");
 import "dotenv/config";
@@ -91,6 +92,10 @@ client.once(Discord.Events.ClientReady, async () => {
     console.error("❌ MongoDB connection failed:", err);
   }
 });
+
+client.on("debug", (msg) => console.log("DEBUG:", msg));
+client.on("warn", (msg) => console.log("WARN:", msg));
+client.on("error", (err) => console.error("ERROR:", err));
 
 // Interaction handler
 client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
