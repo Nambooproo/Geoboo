@@ -1,6 +1,10 @@
-process.env.NODE_OPTIONS = "--dns-result-order=ipv4first";
 import dns from "dns";
+
 dns.setDefaultResultOrder("ipv4first");
+
+// Force Node to prefer IPv4 globally
+process.env.NODE_OPTIONS = "--dns-result-order=ipv4first";
+
 import "dotenv/config";
 import express from "express";
 import * as fs from "fs";
@@ -16,8 +20,15 @@ const client = new Discord.Client({
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMessages,
     Discord.GatewayIntentBits.MessageContent,
-    Discord.GatewayIntentBits.GuildMembers,
-  ]
+  ],
+  ws: {
+    properties: {
+      browser: "Discord iOS" // helps bypass some network weirdness
+    }
+  },
+  rest: {
+    retries: 5
+  }
 });
 
 async function slashCommandHandler(interaction: any) {
@@ -97,6 +108,18 @@ client.on("debug", (msg) => console.log("DEBUG:", msg));
 client.on("warn", (msg) => console.log("WARN:", msg));
 client.on("error", (err) => console.error("ERROR:", err));
 
+client.on("shardDisconnect", () => {
+  console.log("❌ Disconnected from Discord");
+});
+
+client.on("shardReconnecting", () => {
+  console.log("🔄 Reconnecting...");
+});
+
+client.on("ready", () => {
+  console.log("✅ BOT ONLINE");
+});
+
 // Interaction handler
 client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
 
@@ -122,10 +145,7 @@ client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
   }
 });
 
-console.log("Before login");
-console.log("TOKEN:", process.env.DISCORD_TOKEN);
-client.login(process.env.DISCORD_TOKEN)
-  .then(() => console.log("✅ Login success"))
-  .catch(err => console.error("❌ Login failed:", err));
-
-console.log("After login");
+setTimeout(() => {
+  console.log("🚀 Attempting login...");
+  client.login(process.env.DISCORD_TOKEN);
+}, 3000);
