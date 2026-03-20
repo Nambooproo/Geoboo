@@ -118,7 +118,7 @@ client.on(Discord.Events.InteractionCreate, async (interaction: any) => {
 });
 
 console.log("Before login");
-
+console.log("TOKEN:", process.env.DISCORD_TOKEN);
 client.login(process.env.DISCORD_TOKEN)
   .then(() => console.log("✅ Login success"))
   .catch(err => console.error("❌ Login failed:", err));
